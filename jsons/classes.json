@@ -1,0 +1,51 @@
+[
+    {
+        "name": "Accounting202",
+        "day": "Thursday",
+        "period": "Morning",
+        "description": "This course provides an introduction to the concepts and tools of managerial accounting. The first part of the course covers alternative costing methods and illustrates how the resulting cost information can be used to analyze the profitability of individual products and customers. The second part of the course will examine the role of internal accounting systems in evaluating the performance of individual business segments and divisions of the firm. Included in this part are topics related to the choice of internal pricing methods for transferring goods and services across divisions of the firm and the use of financial metrics for assessing the profitability of these divisions.",
+        "class_price": 2000
+    },
+    {
+        "name": "Accounting340",
+        "day": "Monday",
+        "period": "Afternoon",
+        "description": "Empirical Research on Financial Reporting: This doctoral-level course covers research on the role of accounting information in capital markets. The focus is on introducing students to key themes in empirical accounting and capital markets research, and to key research designs applied to examine information-related questions. Course topics include the informational role of financial reports, accounting measurement attributes, earnings management, earnings quality, and the role of key actors in the financial reporting environment, including management, investors, auditors, analysts and regulators. n nThe course is interdisciplinary in nature. The readings focus on research design, and key theories, themes and approaches from the accounting, finance, economics and psychology literature. Our overall goal is develop your understanding of existing research and its strengths and limitations, and to identify new research opportunities.",
+        "class_price": 3000
+    },
+    {
+        "name": "Chemistry110",
+        "day": "Wednesday",
+        "period": "Afternoon",
+        "description": "Students enrolled in this course will appreciate the transformative power of molecular science on the modern world and how foundational knowledge of chemistry enables profound discoveries in biological, pharmaceutical, agrochemical, engineering, energy, and materials science research. This course integrates the lessons of CHEM 31 and CHEM 33 through an examination of the structure-function properties of carbon-based molecules. Specific emphasis is given to the chemistry of carbonyl- and amine-derived compounds, polyfunctionalized molecules, reaction kinetics and thermodynamics, mechanistic arrow-pushing, and retrosynthetic analysis. Students will be empowered with a conceptual understanding of chemical reactivity, physical organic chemistry, and the logic of chemical synthesis. The singular nature of molecular design and synthesis to make available functional molecules and materials will be revealed. A three-hour lab section provides hands on experience with modern chemical methods for preparative and analytical chemistry.",
+        "class_price": 5000
+    },
+    {
+        "name": "Biology80",
+        "day": "Tuesday",
+        "period": "Night",
+        "description": "The goal of this course is to develop an understanding of how to conduct biological research, using a topic in Ecology, Evolutionary Biology, and Plant Biology as a practical example. This includes the complete scientific process: assessing background literature, generating testable hypotheses, learning techniques for field- and lab- based data collection, analyzing data using appropriate statistical methods and finally writing and sharing the results. To build these skills, this course focuses on nectar microbes at Stanfords nearby Jasper Ridge Biological Preserve. Students, working in teams, will develop novel research hypotheses and do the necessary data analyses to test these hypotheses. The capstone of the course is a research paper written in the style of a peer-reviewed journal article as well as an oral defense of students research findings. Because the course will be offered online this year, we will analyze the data collected in previous years rather than conduct field and lab experiments in person. Although there are no pre-requisites to enroll in the class, it will be helpful if you have already taken BIO 81 or are concurrently enrolled in or have already taken the relevant HumBio core class. Note: Satisfies WIM in Biology.",
+        "class_price": 10000
+    },
+    {
+        "name": "Biology80",
+        "day": "Monday",
+        "period": "Afternoon",
+        "description": "The goal of this course is to develop an understanding of how to conduct biological research, using a topic in Ecology, Evolutionary Biology, and Plant Biology as a practical example. This includes the complete scientific process: assessing background literature, generating testable hypotheses, learning techniques for field- and lab- based data collection, analyzing data using appropriate statistical methods and finally writing and sharing the results. To build these skills, this course focuses on nectar microbes at Stanfords nearby Jasper Ridge Biological Preserve. Students, working in teams, will develop novel research hypotheses and do the necessary data analyses to test these hypotheses. The capstone of the course is a research paper written in the style of a peer-reviewed journal article as well as an oral defense of students research findings. Because the course will be offered online this year, we will analyze the data collected in previous years rather than conduct field and lab experiments in person. Although there are no pre-requisites to enroll in the class, it will be helpful if you have already taken BIO 81 or are concurrently enrolled in or have already taken the relevant HumBio core class. Note: Satisfies WIM in Biology.",
+        "class_price": 10000
+    },
+    {
+        "name": "Math20",
+        "day": "Friday",
+        "period": "Morning",
+        "description": "Additional problem solving session for Math 20 guided by a course assistant. Concurrent enrollment in Math 20 required. Application required: https://engineering.stanford.edu/students-academics/equity-and-inclusion-initiatives/undergraduate-programs/additional-calculus",
+        "class_price": 3500
+    },
+    {
+        "name": "Math20",
+        "day": "Wednesday",
+        "period": "Afternoon",
+        "description": "Additional problem solving session for Math 20 guided by a course assistant. Concurrent enrollment in Math 20 required. Application required: https://engineering.stanford.edu/students-academics/equity-and-inclusion-initiatives/undergraduate-programs/additional-calculus",
+        "class_price": 3500
+    }
+]
