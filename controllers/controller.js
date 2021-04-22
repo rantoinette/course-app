@@ -91,7 +91,7 @@ class Controller {
     }
 
     static getProfile(request, response) {
-        console.log(request.session.user); // USE THIS TO QUERY THE DATA
+        console.log(request.session.user, "SESSION USER"); // USE THIS TO QUERY THE DATA
         Student.findOne({
             where: {
                 id: request.session.user.id
@@ -116,7 +116,7 @@ class Controller {
     }
 
     static getRegisteredClasses(request, response) {
-        let id = 1 //change to request.session.id
+        let id = request.session.user.id //change to request.session.id
         Student.findAll({
             where: {id},
             include: [{model: Class}]
@@ -145,7 +145,7 @@ class Controller {
 
     static postRegisterClass(request, response) {
         let newStudentClass = {
-            StudentId : 1, //becomes request.session.id
+            StudentId : request.session.user.id, 
             ClassId : request.body.id
         }
         StudentClass.create(newStudentClass)
@@ -189,7 +189,7 @@ class Controller {
     }
 
     static postEditClass(request, response) {
-        let StudentId = request.session.id
+        let StudentId = request.session.user.id
         let oldClassId = request.params.id
         let newClassId = request.body.id  
         
@@ -211,7 +211,7 @@ class Controller {
 
     static dropClass(request, response) {
         let ClassId = request.params.id
-        let StudentId = request.session.id
+        let StudentId = request.session.user.id
         StudentClass.destroy({where: {
             ClassId,
             StudentId

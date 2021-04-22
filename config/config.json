@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "password",
+    "password": "natsumi",
     "database": "course-app",
     "host": "localhost",
     "dialect": "postgres"
