@@ -1,5 +1,13 @@
 const { Student, Class, StudentClass } = require('../models/index');
 const capitalizeFirstLetter = require('../helpers/capitalizeFirstLetter');
+const nodemailer = require('nodemailer');
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'CourseApp.Hacktiv8@gmail.com',
+        pass: 'passworD123'
+    }
+});
 
 // DEFINE AUTH HERE
 let bcrypt = require('bcryptjs');
@@ -30,6 +38,16 @@ class Controller {
         // console.log(newStudent);
         Student.create(newStudent)
             .then((data) => {
+                const mailOptions = {
+                    from: 'CourseApp.Hacktiv8@gmail.com',
+                    to: request.body.email,
+                    subject: 'Thank you for registering with Course-App',
+                    text: 'Welcome to Course-App! Start registering your courses now!'
+                };
+                transporter.sendMail(mailOptions, (err, info) => {
+                    if (err) throw err;
+                    console.log('Email sent: ' + info.response);
+                });
                 response.redirect('/');
             })
             .catch((error) => {
@@ -58,6 +76,7 @@ class Controller {
                 } else {
                     // ACTIVATE SESSION, REDIRECT TO STUDENT PAGE
                     request.session.user = data;
+                    console.log(request.session.user.email);
                     response.redirect(`/student`);
                 }
             })
