@@ -1,5 +1,6 @@
 const { Student, Class, StudentClass } = require('../models/index');
 const capitalizeFirstLetter = require('../helpers/capitalizeFirstLetter');
+const currencyFormat = require('../helpers/currencyFormat');
 
 // DEFINE AUTH HERE
 let bcrypt = require('bcryptjs');
@@ -25,7 +26,8 @@ class Controller {
             last_name: request.body.last_name,
             email: request.body.email,
             password: hash,
-            gender: request.body.gender
+            gender: request.body.gender,
+            major: request.body.major
         }
         // console.log(newStudent);
         Student.create(newStudent)
@@ -72,13 +74,14 @@ class Controller {
     }
 
     static getProfile(request, response) {
-        console.log(request.session.user); // USE THIS TO QUERY THE DATA
+        // console.log(request.session.user); // USE THIS TO QUERY THE DATA
         Student.findOne({
             where: {
                 id: request.session.user.id
             }
         })
             .then((data) => {
+                console.log(request.session, `<<<< get profile`);
                 response.render('profile.ejs', { student: data, capitalizeFirstLetter });
             })
             .catch((error) => {
@@ -89,7 +92,8 @@ class Controller {
     static getClassList(request, response) {
         Class.findAll()
         .then((data) => {
-            response.send(data)
+            console.log(request.session, `<<<< get class list`);
+            response.render('classList.ejs', { classes: data })
         })
         .catch((err)=> {
             response.send(err)
@@ -97,13 +101,18 @@ class Controller {
     }
 
     static getRegisteredClasses(request, response) {
-        let id = 1 //change to request.session.id
-        Student.findAll({
-            where: {id},
+        // console.log(request.session.user);
+        // let id = 1 //change to request.session.id
+        console.log(request.session, `<<<< get registered classes`);
+        StudentClass.findAll({
+            where: {
+                StudentId: request.session.user.id
+            },
             include: [{model: Class}]
         })
         .then((data) => {
-            response.send(data)
+            response.render('registeredClasses.ejs', { studentClass: data })
+            // response.send(data)
         })
         .catch((err)=> {
             console.log(err)
@@ -116,7 +125,11 @@ class Controller {
         let id = request.params.id
         Class.findByPk(id)
         .then((data) => {
-           // response.render("",{data})
+            let message = null;
+            if (request.query.error) {
+                message = request.query.error.split(',');
+            }
+           response.render("registerAClass.ejs",{ data, error: message, currencyFormat })
         })
         .catch((err)=> {
             console.log(err)
@@ -126,9 +139,10 @@ class Controller {
 
     static postRegisterClass(request, response) {
         let newStudentClass = {
-            StudentId : 1, //becomes request.session.id
-            ClassId : request.body.id
+            StudentId : request.session.user.id,
+            ClassId : request.params.id
         }
+        console.log(newStudentClass);
         StudentClass.create(newStudentClass)
         .then((data) => {
             // console.log(data)
@@ -142,12 +156,15 @@ class Controller {
 
     static getClassmates(request, response) {
         let id = request.params.id
-        Class.findAll({
-            where:{id}, 
+        StudentClass.findAll({
+            where:{
+                ClassId: id
+            }, 
             include: [{model: Student}]
         })
         .then((data) => {
-            response.send(data)
+            response.render('classmates.ejs', { classmates: data })
+            // response.send(data)
         })
         .catch((err)=> {
             console.log(err)
@@ -158,10 +175,23 @@ class Controller {
     static getEditClass(request, response) {
         let ClassId = request.params.id
         // let StudentId = 1 //hmn... need or not?
-        
+        let classData = null;
         Class.findByPk(ClassId)
+        .then((data1) => {
+            classData = data1;
+            return Class.findAll({
+                where: {
+                    name: data1.name
+                }
+            })
+        })
         .then((data) => {
-            response.render("", {data})
+            // response.send(data)
+            let message = null;
+            if (request.query.error) {
+                message = request.query.error.split(',');
+            }
+            response.render('editRegisteredClass.ejs', { classData, schedule: data, error: message })
         })
         .catch((err)=> {
             console.log(err)
@@ -170,35 +200,50 @@ class Controller {
     }
 
     static postEditClass(request, response) {
-        let StudentId = request.session.id
         let oldClassId = request.params.id
-        let newClassId = request.body.id  
-        
-        StudentClass.findAll({where: {StudentId}})
-        .then((data) => {
-            if (data.classId == oldClassId) {
-                data.ClassId = newClassId
+        let separate = request.body.day.split(' ');
+        console.log(separate, `<<<<<<<`);
+            let newClass = {
+                day: separate[0],
+                period: separate[1]
             }
-            return data.save()
+        Class.findOne({ 
+            where: {
+                name: request.body.name,
+                day: newClass.day,
+                period: newClass.period
+            }
         })
+            .then((data)=> {
+                console.log(data.id, `<<<<<<`);
+                console.log(request.session);
+                return StudentClass.update({ClassId: data.id}, {
+                    where: {
+                        StudentId: request.session.user.id,
+                        ClassId: oldClassId
+                    }
+                })
+            })
         .then((data) => {
-            response.send(data)
+            response.redirect('/student/classes');
+            // response.send(data)
         })
         .catch((err)=> {
             console.log(err)
-            response.send(err)
+            response.redirect(`/student/classes/${request.params.id}/edit?error=${err}`)
         })
     }
 
     static dropClass(request, response) {
         let ClassId = request.params.id
-        let StudentId = request.session.id
+        let StudentId = request.session.user.id
         StudentClass.destroy({where: {
             ClassId,
             StudentId
         }})
         .then((data) => {
-            response.send(data)
+            // response.send(data)
+            response.redirect('/student/classes');
         })
         .catch((err)=> {
             console.log(err)

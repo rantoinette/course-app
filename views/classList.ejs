@@ -10,7 +10,29 @@
                     Class List
                 </div>
                 <div class="card-body">
-                  
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col-1">No.</th>
+                            <th scope="col-5">Class Name</th>
+                            <th scope="col-5">Day/Period</th>
+                            <th scope="col-1">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                               <% classes.map((classroom, index) => { %>
+                                    <tr>
+                                        <td class="col-2"><%= index + 1 %> </td>
+                                        <td class="col-4"><%= classroom.name %></td>
+                                        <td class="col-4"><%= classroom.day %></td>
+                                        <td class="col-2">
+                                            <a href="/classes/<%= classroom.id %>/register" class="btn btn-success">Register</a>
+                                            <a href="/classes/<%= classroom.id %>/classmates" class="btn btn-info">View Classmates</a>
+                                        </td>
+                                    </tr>
+                               <% }) %> 
+                        </tbody>
+                      </table>
                 </div>
             </div>
         </div>
