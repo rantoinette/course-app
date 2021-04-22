@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <%- include('partials/head') %>
+</head>
+<body>
+    <%- include('partials/loggedNav') %>
+    <% if (error) { %>
+        <div class="p-3 mb-2 bg-danger text-white"><%= error  %> </div>
+    <% } %>
+    <div class="container-fluid">
+        <div class="mt-5 container">
+            <div class="card">
+                <div class="card-header">
+                Edit Class Schedule
+                </div>
+                <div class="card-body">
+                    <form action="/student/classes/<%= classData.id %>/edit" method="post">
+                            <div class="form-group">
+                                <label for="name">Class Name</label>
+                                <select class="form-control" name="name" id="name">
+                                    <option value="<%= classData.name %>"><%= classData.name %></option>
+                                </select>
+                            </div>
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend">
+                                  <label class="input-group-text" for="inputGroupSelect01">Schedule</label>
+                                </div>
+                                <select class="form-control" name="day" id="day">
+                                    <% schedule.map((schedule) => { %>
+                                        <option value="<%=`${schedule.day} ${schedule.period}`%>"><%=` ${schedule.day} ${schedule.period}`%></option>
+                                    <% }) %> 
+                                </select>
+                              </div>
+                        <button type="submit" class="btn btn-primary mt-3" onclick="return confirm('are you sure ?')">Confirm</button>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

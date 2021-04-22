@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    combineDayPeriod() {
+      return `${this.day} ${this.period}`
+    }
     static associate(models) {
       Class.belongsToMany(models.Student, {through: "StudentClass"})
     }

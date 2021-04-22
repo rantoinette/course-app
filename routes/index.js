@@ -18,7 +18,10 @@ app.get('/login', Controller.getLogin);
 app.use(session({
     secret: 'course-app-session',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 8 * 60 * 60 * 1000
+    }
 }))
 
 // SESSION ENABLED ROUTES
