@@ -24,7 +24,7 @@
                                     <tr>
                                         <td class="col-2"><%= index + 1 %> </td>
                                         <td class="col-4"><%= classroom.name %></td>
-                                        <td class="col-4"><%= classroom.day %></td>
+                                        <td class="col-4"><%= classroom.combineDayPeriod() %></td>
                                         <td class="col-2">
                                             <a href="/classes/<%= classroom.id %>/register" class="btn btn-success">Register</a>
                                             <a href="/classes/<%= classroom.id %>/classmates" class="btn btn-info">View Classmates</a>
