@@ -4,34 +4,39 @@
         "last_name": "Austin",
         "email": "jane.a@gmail.com",
         "password": "123456",
-        "gender": "female"
+        "gender": "female",
+        "major" : "Mathematics"
     },
     {
         "first_name": "Snow",
         "last_name": "White",
         "email": "snow@gmail.com",
         "password": "123456",
-        "gender": "female"
+        "gender": "female",
+        "major" : "Chemistry"
     },
     {
         "first_name": "Flynn",
         "last_name": "Ryder",
         "email": "flyn.ry@gmail.com",
         "password": "123456",
-        "gender": "male"
+        "gender": "male",
+        "major" : "Business"
     },
     {
         "first_name": "Pocahontas",
         "last_name": "",
         "email": "pocahontas@gmail.com",
         "password": "123456",
-        "gender": "female"
+        "gender": "female",
+        "major" : "Biology"
     },
     {
         "first_name": "John",
         "last_name": "Smith",
         "email": "john@gmail.com",
         "password": "123456",
-        "gender": "male"
+        "gender": "male",
+        "major" : "Sociology"
     }
 ]
