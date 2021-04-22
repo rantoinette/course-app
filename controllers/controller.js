@@ -2,12 +2,8 @@ const { Student, Class, StudentClass } = require('../models/index');
 const capitalizeFirstLetter = require('../helpers/capitalizeFirstLetter');
 
 // DEFINE AUTH HERE
-<<<<<<< HEAD
 let bcrypt = require('bcryptjs');
 let salt = bcrypt.genSaltSync(10);
-=======
-const {Student, Class, StudentClass} = require("../models")
->>>>>>> f61c96a0a67475ea18cad3be8cc8e02f3380e80d
 
 class Controller {
     static homepage(request, response) {
@@ -76,7 +72,6 @@ class Controller {
     }
 
     static getProfile(request, response) {
-<<<<<<< HEAD
         console.log(request.session.user); // USE THIS TO QUERY THE DATA
         Student.findOne({
             where: {
@@ -89,15 +84,6 @@ class Controller {
             .catch((error) => {
 
             })
-=======
-        Student.findAll()
-        .then((data) => {
-            response.render("students", {data})
-        })
-        .catch((err)=> {
-            response.send(err)
-        })
->>>>>>> f61c96a0a67475ea18cad3be8cc8e02f3380e80d
     }
 
     static getClassList(request, response) {
