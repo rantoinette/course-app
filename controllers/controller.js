@@ -1,5 +1,7 @@
 const { Student, Class, StudentClass } = require('../models/index');
 const capitalizeFirstLetter = require('../helpers/capitalizeFirstLetter');
+const currencyFormat = require('../helpers/currencyFormat');
+
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
     service: 'gmail',
