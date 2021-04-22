@@ -11,11 +11,11 @@
                 </div>
                 <div class="card-body">
                     <h4>Fullname:</h4>
-                    <h4><%= `${student.first_name} ${student.last_name}` %></h4>
+                    <input class="form-control" type="text" value="<%= `${student.first_name} ${student.last_name}` %>" readonly>
                     <h4 class="mt-3">Gender:</h4>
-                    <h4><%= capitalizeFirstLetter(student.gender) %></h4>
+                    <input class="form-control" type="text" value="<%= capitalizeFirstLetter(student.gender) %>" readonly>
                     <h4 class="mt-3">Major:</h4>
-                    <h4><%= student.major %></h4>
+                    <input class="form-control" type="text" value="<%= student.major %>" readonly>
                 </div>
             </div>
         </div>
