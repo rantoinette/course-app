@@ -1,6 +1,7 @@
 const { Student, Class, StudentClass } = require('../models/index');
 const capitalizeFirstLetter = require('../helpers/capitalizeFirstLetter');
 const currencyFormat = require('../helpers/currencyFormat');
+const { Op } = require("sequelize")
 
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
@@ -178,7 +179,10 @@ class Controller {
         let id = request.params.id
         StudentClass.findAll({
             where:{
-                ClassId: id
+                ClassId: id,
+                StudentId: {
+                    [Op.ne]: request.session.user.id
+                }
             }, 
             include: [{model: Student}]
         })
