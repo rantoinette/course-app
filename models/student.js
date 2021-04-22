@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    static major(major) {
+       return `Bachelor of ${major}`
+    }
+
     static associate(models) {
       Student.belongsToMany(models.Class, {through: "StudentClass"})
     }

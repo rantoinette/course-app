@@ -102,7 +102,7 @@ class Controller {
             }
         })
             .then((data) => {
-                console.log(request.session, `<<<< get profile`);
+                data.major = Student.major(data.major);
                 response.render('profile.ejs', { student: data, capitalizeFirstLetter });
             })
             .catch((error) => {
@@ -113,7 +113,6 @@ class Controller {
     static getClassList(request, response) {
         Class.findAll()
         .then((data) => {
-            console.log(request.session, `<<<< get class list`);
             response.render('classList.ejs', { classes: data })
         })
         .catch((err)=> {
@@ -124,7 +123,6 @@ class Controller {
     static getRegisteredClasses(request, response) {
         // console.log(request.session.user);
         // let id = 1 //change to request.session.id
-        console.log(request.session, `<<<< get registered classes`);
         StudentClass.findAll({
             where: {
                 StudentId: request.session.user.id
@@ -150,7 +148,7 @@ class Controller {
             if (request.query.error) {
                 message = request.query.error.split(',');
             }
-           response.render("registerAClass.ejs",{ data, error: message, currencyFormat })
+            response.render("registerAClass.ejs",{ data, error: message, currencyFormat })
         })
         .catch((err)=> {
             console.log(err)
@@ -226,7 +224,6 @@ class Controller {
     static postEditClass(request, response) {
         let oldClassId = request.params.id
         let separate = request.body.day.split(' ');
-        console.log(separate, `<<<<<<<`);
             let newClass = {
                 day: separate[0],
                 period: separate[1]
@@ -239,8 +236,6 @@ class Controller {
             }
         })
             .then((data)=> {
-                console.log(data.id, `<<<<<<`);
-                console.log(request.session);
                 return StudentClass.update({ClassId: data.id}, {
                     where: {
                         StudentId: request.session.user.id,
