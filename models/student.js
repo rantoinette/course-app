@@ -20,6 +20,13 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     gender: DataTypes.STRING
   }, {
+    hooks: {
+      beforeCreate(instance, options) {
+        if (instance.last_name == "") {
+          instance.last_name = instance.first_name;
+        }
+      }
+    },
     sequelize,
     modelName: 'Student',
   });

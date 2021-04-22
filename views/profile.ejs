@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('partials/head') %>
+<body>
+    <%- include('partials/loggedNav') %>
+    <div class="container-fluid">
+        <div class="mt-5 container">
+            <div class="card">
+                <div class="card-header">
+                    Student Card
+                </div>
+                <div class="card-body">
+                    <h4>Fullname:</h4>
+                    <h4><%= `${student.first_name} ${student.last_name}` %></h4>
+                    <h4>Gender:</h4>
+                    <h4><%= capitalizeFirstLetter(student.gender) %></h4>
+                    <h4>Major:</h4>
+                    <h4><%= %></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
