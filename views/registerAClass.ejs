@@ -19,15 +19,15 @@
                         <fieldset disabled>
                             <div class="form-group">
                               <label for="name">Class Name</label>
-                              <input type="text" name="name" id="name" class="form-control" placeholder="<%= data.name %>">
+                              <input type="text" name="name" id="name" class="form-control" value="<%= data.name %>">
                             </div>
                             <div class="form-group mt-3">
                                 <label for="day">Day</label>
-                                <input type="text" name="day" id="day" class="form-control" placeholder="<%= data.day %>">
+                                <input type="text" name="day" id="day" class="form-control" value="<%= data.day %>">
                             </div>
                             <div class="form-group mt-3">
                                 <label for="period">Period</label>
-                                <input type="text" name="period" id="period" class="form-control" placeholder="<%= data.period %>">
+                                <input type="text" name="period" id="period" class="form-control" value="<%= data.period %>">
                             </div>
                             <div class="form-group mt-3">
                                 <label for="description">Description</label>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group mt-3">
                                 <label for="class_price">Price</label>
-                                <input type="text" name="class_price" id="class_price" class="form-control" placeholder="<%= currencyFormat(data.class_price) %>">
+                                <input type="text" name="class_price" id="class_price" class="form-control" value="<%= currencyFormat(data.class_price) %>">
                             </div>
                           </fieldset>
                         <button type="submit" class="btn btn-primary mt-3">Register</button>
