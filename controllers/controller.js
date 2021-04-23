@@ -96,64 +96,79 @@ class Controller {
 
     static getProfile(request, response) {
         // console.log(request.session.user); // USE THIS TO QUERY THE DATA
-        Student.findOne({
-            where: {
-                id: request.session.user.id
-            }
-        })
-            .then((data) => {
-                data.major = Student.major(data.major);
-                response.render('profile.ejs', { student: data, capitalizeFirstLetter });
+        if (!request.session.user) {
+            response.redirect('/')
+        } else {
+            Student.findOne({
+                where: {
+                    id: request.session.user.id
+                }
             })
-            .catch((error) => {
-
-            })
+                .then((data) => {
+                    data.major = Student.major(data.major);
+                    response.render('profile.ejs', { student: data, capitalizeFirstLetter });
+                })
+                .catch((error) => {
+    
+                })
+        }
     }
 
     static getClassList(request, response) {
-        Class.findAll()
-        .then((data) => {
-            response.render('classList.ejs', { classes: data })
-        })
-        .catch((err)=> {
-            response.send(err)
-        })
+        if (!request.session.user) {
+            response.redirect('/')
+        } else {
+            Class.findAll()
+                .then((data) => {
+                    response.render('classList.ejs', { classes: data })
+                })
+                .catch((err)=> {
+                    response.send(err)
+                })
+        }
+        
     }
 
     static getRegisteredClasses(request, response) {
-        // console.log(request.session.user);
-        // let id = 1 //change to request.session.id
-        StudentClass.findAll({
-            where: {
-                StudentId: request.session.user.id
-            },
-            include: [{model: Class}]
-        })
-        .then((data) => {
-            response.render('registeredClasses.ejs', { studentClass: data })
-            // response.send(data)
-        })
-        .catch((err)=> {
-            console.log(err)
-            response.send(err)
-        })
+        if (!request.session.user) {
+            response.redirect('/')
+        } else {
+            StudentClass.findAll({
+                where: {
+                    StudentId: request.session.user.id
+                },
+                include: [{model: Class}]
+            })
+                .then((data) => {
+                    response.render('registeredClasses.ejs', { studentClass: data })
+                    // response.send(data)
+                })
+                .catch((err)=> {
+                    console.log(err)
+                    response.send(err)
+                })
+        }
     }
     
 
     static getRegisterClass(request, response) {
-        let id = request.params.id
-        Class.findByPk(id)
-        .then((data) => {
-            let message = null;
-            if (request.query.error) {
-                message = request.query.error.split(',');
-            }
-            response.render("registerAClass.ejs",{ data, error: message, currencyFormat })
-        })
-        .catch((err)=> {
-            console.log(err)
-            response.send(err)
-        })
+        if (!request.session.user) {
+            response.redirect('/')
+        } else {
+            let id = request.params.id
+            Class.findByPk(id)
+                .then((data) => {
+                    let message = null;
+                    if (request.query.error) {
+                        message = request.query.error.split(',');
+                    }
+                    response.render("registerAClass.ejs",{ data, error: message, currencyFormat })
+                })
+                .catch((err)=> {
+                    console.log(err)
+                    response.send(err)
+                })
+        }
     }
 
     static postRegisterClass(request, response) {
@@ -174,51 +189,58 @@ class Controller {
     }
 
     static getClassmates(request, response) {
-        let id = request.params.id
-        StudentClass.findAll({
-            where:{
-                ClassId: id,
-                StudentId: {
-                    [Op.ne]: request.session.user.id
-                }
-            }, 
-            include: [{model: Student}]
-        })
-        .then((data) => {
-            response.render('classmates.ejs', { classmates: data })
-            // response.send(data)
-        })
-        .catch((err)=> {
-            console.log(err)
-            response.send(err)
-        })
+        if (!request.session.user) {
+            response.redirect('/')
+        } else {
+            let id = request.params.id
+            StudentClass.findAll({
+                where:{
+                    ClassId: id,
+                    StudentId: {
+                        [Op.ne]: request.session.user.id
+                    }
+                }, 
+                include: [{model: Student}]
+            })
+                .then((data) => {
+                    response.render('classmates.ejs', { classmates: data })
+                    // response.send(data)
+                })
+                .catch((err)=> {
+                    console.log(err)
+                    response.send(err)
+                })
+        }
     }
 
     static getEditClass(request, response) {
-        let ClassId = request.params.id
-        // let StudentId = 1 //hmn... need or not?
-        let classData = null;
-        Class.findByPk(ClassId)
-        .then((data1) => {
-            classData = data1;
-            return Class.findAll({
-                where: {
-                    name: data1.name
-                }
-            })
-        })
-        .then((data) => {
-            // response.send(data)
-            let message = null;
-            if (request.query.error) {
-                message = request.query.error.split(',');
-            }
-            response.render('editRegisteredClass.ejs', { classData, schedule: data, error: message })
-        })
-        .catch((err)=> {
-            console.log(err)
-            response.send(err)
-        })
+        if (!request.session.user) {
+            response.redirect('/')
+        } else {
+            let ClassId = request.params.id
+            let classData = null;
+            Class.findByPk(ClassId)
+                .then((data1) => {
+                    classData = data1;
+                    return Class.findAll({
+                        where: {
+                            name: data1.name
+                        }
+                    })
+                })
+                .then((data) => {
+                    // response.send(data)
+                    let message = null;
+                    if (request.query.error) {
+                        message = request.query.error.split(',');
+                    }
+                    response.render('editRegisteredClass.ejs', { classData, schedule: data, error: message })
+                })
+                .catch((err)=> {
+                    console.log(err)
+                    response.send(err)
+                })
+        }
     }
 
     static postEditClass(request, response) {
